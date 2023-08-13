@@ -1,0 +1,1 @@
+g++ -I/usr/include/boost MultiThreadServerHandler.cpp -o multiThreadServer -lpthread
