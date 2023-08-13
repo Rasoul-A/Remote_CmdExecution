@@ -23,7 +23,13 @@ using namespace std;
 
 std::string exec(const char *cmd)
 {
-    std::shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
+    // f = popen("exec bash -c 'shopt -s dotglob; cat -- *'", "r");
+    // [200];
+    // char *prefix = "exec bash -c \'";
+    // char *finalcmd = strcat(prefix, cmd);
+    // finalcmd = strcat(prefix, cmd);
+    cout<<"^^^^^^^^^^^^^^^CMD"<<std::string("bash -c \'"+std::string(cmd)+"\'").c_str()<<"\n";
+    std::shared_ptr<FILE> pipe(popen(std::string("bash -c \'"+std::string(cmd)+"\'").c_str(), "r"), pclose);
     if (!pipe)
         return "ERROR";
     char buffer[128];
