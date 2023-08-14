@@ -1,0 +1,1 @@
+g++  MultiThreadServerHandler.cpp -o threadPoolServer -lpthread

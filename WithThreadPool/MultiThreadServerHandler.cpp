@@ -28,7 +28,7 @@ std::string exec(const char *cmd)
     // char *prefix = "exec bash -c \'";
     // char *finalcmd = strcat(prefix, cmd);
     // finalcmd = strcat(prefix, cmd);
-    cout<<"^^^^^^^^^^^^^^^CMD"<<std::string("bash -c \'"+std::string(cmd)+"\'").c_str()<<"\n";
+    cout<<"Prepared CMD: "<<std::string("bash -c \'"+std::string(cmd)+"\'").c_str()<<"\n";
     std::shared_ptr<FILE> pipe(popen(std::string("bash -c \'"+std::string(cmd)+"\'").c_str(), "r"), pclose);
     if (!pipe)
         return "ERROR";
@@ -79,7 +79,7 @@ void handler(int id, int sd, sockaddr_in s_addr, socklen_t s_addr_size)
     gettimeofday(&end1, NULL);
     close(sd);
     // cout << "******** thread Session********" << endl;
-    // cout << "Bytes written: " << bytesWritten << " Bytes read: " << bytesRead << endl;
+    cout << "Bytes written: " << bytesWritten << " Bytes read: " << bytesRead << endl;
     // cout << "Elapsed time: " << (end1.tv_sec - start1.tv_sec)
     //      << " secs" << endl;
     // cout << "Connection closed..." << endl;
