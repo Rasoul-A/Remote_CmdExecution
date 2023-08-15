@@ -44,7 +44,7 @@ std::string exec(const char *cmd)
 
 void handler(int id, int sd, sockaddr_in s_addr, socklen_t s_addr_size)
 {
-    cout << "In thread " << id << "..." << endl;
+    cout << "In thread " << id << " ..." << endl;
     // buffer to send and receive messages with
     char msg[1500];
     // lets keep track of the session time
@@ -53,7 +53,7 @@ void handler(int id, int sd, sockaddr_in s_addr, socklen_t s_addr_size)
     // also keep track of the amount of data sent as well
     int bytesRead, bytesWritten = 0;
     // receive a message from the client (listen)
-    cout << "Awaiting Backend CMD..." << endl;
+    cout<<"Thread "<<id<< " => Receiving Backend CMD..." << endl;
     memset(&msg, 0, sizeof(msg)); // clear the buffer
     bytesRead += recv(sd, (char *)&msg, sizeof(msg), 0);
     // if(!strcmp(msg, "exit"))
@@ -61,9 +61,9 @@ void handler(int id, int sd, sockaddr_in s_addr, socklen_t s_addr_size)
     //     cout << "Client has quit the session" << endl;
     //     break;
     // }
-    cout << "Backend: " << msg << endl;
+    cout<<"Thread "<<id<< " => Backend: " << msg << endl;
     string data = exec(std::string(msg).c_str());
-    cout << "CMD output: " << data << endl;
+    cout<<"Thread "<<id<< " => CMD output: " << data << endl;
     // data = string;
     memset(&msg, 0, sizeof(msg)); // clear the buffer
     strcpy(msg, data.c_str());
@@ -79,7 +79,7 @@ void handler(int id, int sd, sockaddr_in s_addr, socklen_t s_addr_size)
     gettimeofday(&end1, NULL);
     close(sd);
     // cout << "******** thread Session********" << endl;
-    cout << "Bytes written: " << bytesWritten << " Bytes read: " << bytesRead << endl;
+    cout<<"Thread "<<id<< " => Bytes written: " << bytesWritten << " Bytes read: " << bytesRead << endl;
     // cout << "Elapsed time: " << (end1.tv_sec - start1.tv_sec)
     //      << " secs" << endl;
     // cout << "Connection closed..." << endl;
@@ -163,6 +163,7 @@ int main(int argc, char *argv[])
         int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
         if (newSd < 0)
         {
+            timestamp_now();
             cerr << "Error accepting request from client!" << endl;
             exit(1);
         }
