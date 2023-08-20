@@ -1,1 +1,1 @@
-g++  MultiThreadServerHandler.cpp -o threadPoolServer -lpthread
+g++  MultiThreadServerHandler.cpp -o threadPoolServer -lpthread --std=c++11
