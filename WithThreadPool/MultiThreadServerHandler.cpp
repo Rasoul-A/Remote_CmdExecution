@@ -46,7 +46,7 @@ void handler(int id, int sd, sockaddr_in s_addr, socklen_t s_addr_size)
 {
     cout << "In thread " << id << " ..." << endl;
     // buffer to send and receive messages with
-    char msg[1500];
+    char msg[3500];
     // lets keep track of the session time
     struct timeval start1, end1;
     gettimeofday(&start1, NULL);
